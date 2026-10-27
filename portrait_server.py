@@ -26,7 +26,10 @@ MAX_BODY = 1_048_576
 GENERATION = threading.Lock()
 SETTINGS_FILE = ROOT / "portrait-settings.json"
 SETTINGS_LOCK = threading.RLock()
-SETTINGS_DEFAULTS = {"thinking": True, "preset": "16g", "prompt": ""}
+PROMPT_FILE = ROOT / "sydney_system_prompt.txt"
+# 默认系统提示词：Bing 2023 提示词的 Sydney 改写版；网页设置里保存过的提示词优先。
+DEFAULT_PROMPT = PROMPT_FILE.read_text(encoding="utf-8").strip() if PROMPT_FILE.exists() else ""
+SETTINGS_DEFAULTS = {"thinking": True, "preset": "16g", "prompt": DEFAULT_PROMPT}
 MODEL_SERVICE = "sydney-portrait-model.service"
 ALLOWED_NETWORKS = tuple(ipaddress.ip_network(value.strip()) for value in
                          os.environ.get("SYDNEY_ALLOWED_NETWORKS", "127.0.0.0/8,::1/128").split(",") if value.strip())

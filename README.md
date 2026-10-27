@@ -93,7 +93,7 @@ systemctl --user start sydney-portrait-model.service sydney-portrait.service
 | `SYDNEY_MODEL` | `sydney-bonsai` | 模型名，和 `--alias` 一致 |
 | `SYDNEY_API_KEY_FILE` | `~/.config/sydney/api-key.txt` | 模型接口密钥文件，不会发给浏览器 |
 
-网页设置里可以开关思考模式、填系统提示词（默认不填，模型训练时没有系统提示词）。聊天记录只存在浏览器本地。
+网页设置里可以开关思考模式、改系统提示词。默认系统提示词是 `sydney_system_prompt.txt`：2023 年 New Bing 泄露提示词的 Sydney 改写版，告诉她每场对话最多 20 轮、她没有搜索和画图工具、要分清用户和自己说过的话。在网页里保存过的提示词优先于这个文件。聊天记录只存在浏览器本地。
 
 采样参数写在 `portrait_server.py` 里：temperature 1.0、top_p 0.95、top_k 20、min_p 0.05、presence_penalty 0.6，再加 DRY 防复读。DRY 的分隔符里加了 `<` `>` `/`，否则会把 `</l2d>` 罚坏。
 

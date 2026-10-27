@@ -59,14 +59,17 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(events[0], {"reasoning": "思考"})
         self.assertEqual(events[1], {"delta": "<l2d>happy</l2d>你好！"})
         self.assertEqual(events[-1], {"done": True})
-        self.assertEqual(MockModel.last["messages"], [{"role": "user", "content": "你好"}])
+        # 没保存过提示词时，默认提示词（sydney_system_prompt.txt）放在最前面
+        self.assertEqual(MockModel.last["messages"], [{"role": "system", "content": app.DEFAULT_PROMPT}, {"role": "user", "content": "你好"}])
+        self.assertTrue(app.DEFAULT_PROMPT.startswith("# 这是 Sydney 的聊天。"))
         self.assertFalse(app.GENERATION.locked())
     def test_history_keeps_reasoning_and_drops_system_hint(self):
         history = [{"role": "user", "content": "嗨"}, {"role": "assistant", "content": "<l2d>happy</l2d>你好", "reasoning_content": "用户在打招呼"},
                    {"role": "user", "content": "你好", "reasoning_content": "用户消息不带思考"}]
         with self.request("/api/chat", {"messages": history}) as response: response.read()
-        self.assertEqual(MockModel.last["messages"][1]["reasoning_content"], "用户在打招呼")
-        self.assertNotIn("reasoning_content", MockModel.last["messages"][2])
+        self.assertEqual(MockModel.last["messages"][0]["role"], "system")
+        self.assertEqual(MockModel.last["messages"][2]["reasoning_content"], "用户在打招呼")
+        self.assertNotIn("reasoning_content", MockModel.last["messages"][3])
         self.assertEqual(MockModel.last["chat_template_kwargs"]["reasoning_effort"], "medium")
     def test_path_traversal(self):
         with self.assertRaises(urllib.error.HTTPError) as error: self.request("/%2e%2e/%2e%2e/portrait_server.py")
