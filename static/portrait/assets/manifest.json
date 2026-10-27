@@ -1,0 +1,358 @@
+{
+  "version": 4,
+  "width": 1024,
+  "height": 1536,
+  "style": "bocchi-inspired-cel-anime",
+  "emotions": {
+    "calm": {
+      "body": "/assets/portraits/calm.png?v=52935dc6ca18",
+      "anchor": {
+        "x": 508,
+        "y": 320,
+        "width": 38,
+        "rotation": -14
+      },
+      "mouth": {
+        "image": "/assets/mouths/calm.png?v=9af794a797e6",
+        "width": 2172,
+        "height": 724,
+        "referenceWidth": 234,
+        "frames": [
+          [
+            306,
+            386,
+            234,
+            41
+          ],
+          [
+            981,
+            351,
+            211,
+            85
+          ],
+          [
+            1693,
+            327,
+            202,
+            133
+          ]
+        ]
+      }
+    },
+    "happy": {
+      "body": "/assets/portraits/happy.png?v=4d7b91028226",
+      "anchor": {
+        "x": 508,
+        "y": 320,
+        "width": 38,
+        "rotation": -14
+      },
+      "mouth": {
+        "image": "/assets/mouths/happy.png?v=7682fe1af65b",
+        "width": 2172,
+        "height": 724,
+        "referenceWidth": 277,
+        "frames": [
+          [
+            256,
+            354,
+            277,
+            51
+          ],
+          [
+            971,
+            340,
+            230,
+            96
+          ],
+          [
+            1647,
+            302,
+            273,
+            171
+          ]
+        ]
+      }
+    },
+    "curious": {
+      "body": "/assets/portraits/curious.png?v=5dfbc17848eb",
+      "anchor": {
+        "x": 508,
+        "y": 320,
+        "width": 38,
+        "rotation": -14
+      },
+      "mouth": {
+        "image": "/assets/mouths/curious.png?v=5a810e5c0589",
+        "width": 2172,
+        "height": 724,
+        "referenceWidth": 228,
+        "frames": [
+          [
+            310,
+            386,
+            228,
+            31
+          ],
+          [
+            1005,
+            354,
+            184,
+            94
+          ],
+          [
+            1685,
+            319,
+            195,
+            156
+          ]
+        ]
+      }
+    },
+    "shy": {
+      "body": "/assets/portraits/shy.png?v=567d8ffb47ae",
+      "anchor": {
+        "x": 508,
+        "y": 320,
+        "width": 38,
+        "rotation": -14
+      },
+      "mouth": {
+        "image": "/assets/mouths/shy.png?v=ac340b338557",
+        "width": 2172,
+        "height": 724,
+        "referenceWidth": 235,
+        "frames": [
+          [
+            302,
+            382,
+            235,
+            41
+          ],
+          [
+            986,
+            350,
+            209,
+            86
+          ],
+          [
+            1659,
+            323,
+            201,
+            131
+          ]
+        ]
+      }
+    },
+    "excited": {
+      "body": "/assets/portraits/excited.png?v=6c0a8c4b43e6",
+      "anchor": {
+        "x": 508,
+        "y": 320,
+        "width": 38,
+        "rotation": -14
+      },
+      "mouth": {
+        "image": "/assets/mouths/excited.png?v=1e8cd1606d2e",
+        "width": 2172,
+        "height": 724,
+        "referenceWidth": 322,
+        "frames": [
+          [
+            239,
+            368,
+            322,
+            57
+          ],
+          [
+            931,
+            344,
+            310,
+            99
+          ],
+          [
+            1645,
+            290,
+            289,
+            182
+          ]
+        ]
+      }
+    },
+    "surprised": {
+      "body": "/assets/portraits/surprised.png?v=4166b1b4bc46",
+      "anchor": {
+        "x": 508,
+        "y": 320,
+        "width": 38,
+        "rotation": -14
+      },
+      "mouth": {
+        "image": "/assets/mouths/surprised.png?v=1c7be5ba7158",
+        "width": 2172,
+        "height": 724,
+        "referenceWidth": 201,
+        "frames": [
+          [
+            310,
+            393,
+            201,
+            20
+          ],
+          [
+            1018,
+            327,
+            137,
+            117
+          ],
+          [
+            1672,
+            259,
+            175,
+            234
+          ]
+        ]
+      }
+    },
+    "laugh": {
+      "body": "/assets/portraits/laugh.png?v=d95c6000a217",
+      "anchor": {
+        "x": 508,
+        "y": 320,
+        "width": 38,
+        "rotation": -14
+      },
+      "mouth": {
+        "image": "/assets/mouths/laugh.png?v=92cd62896ce2",
+        "width": 2172,
+        "height": 724,
+        "referenceWidth": 360,
+        "frames": [
+          [
+            242,
+            349,
+            329,
+            67
+          ],
+          [
+            906,
+            305,
+            360,
+            154
+          ],
+          [
+            1613,
+            270,
+            317,
+            208
+          ]
+        ]
+      }
+    },
+    "worried": {
+      "body": "/assets/portraits/worried.png?v=348dc2a23bed",
+      "anchor": {
+        "x": 508,
+        "y": 320,
+        "width": 38,
+        "rotation": -14
+      },
+      "mouth": {
+        "image": "/assets/mouths/worried.png?v=72dc6b6ea641",
+        "width": 2172,
+        "height": 724,
+        "referenceWidth": 265,
+        "frames": [
+          [
+            295,
+            373,
+            239,
+            41
+          ],
+          [
+            975,
+            343,
+            223,
+            87
+          ],
+          [
+            1626,
+            328,
+            265,
+            114
+          ]
+        ]
+      }
+    },
+    "sad": {
+      "body": "/assets/portraits/sad.png?v=9804bcf44ca6",
+      "anchor": {
+        "x": 508,
+        "y": 320,
+        "width": 38,
+        "rotation": -14
+      },
+      "mouth": {
+        "image": "/assets/mouths/sad.png?v=3eb9f0339633",
+        "width": 2172,
+        "height": 724,
+        "referenceWidth": 276,
+        "frames": [
+          [
+            283,
+            356,
+            276,
+            54
+          ],
+          [
+            979,
+            335,
+            218,
+            73
+          ],
+          [
+            1654,
+            319,
+            222,
+            125
+          ]
+        ]
+      }
+    },
+    "angry": {
+      "body": "/assets/portraits/angry.png?v=2ced31fad85b",
+      "anchor": {
+        "x": 508,
+        "y": 320,
+        "width": 38,
+        "rotation": -14
+      },
+      "mouth": {
+        "image": "/assets/mouths/angry.png?v=305809042220",
+        "width": 2172,
+        "height": 724,
+        "referenceWidth": 301,
+        "frames": [
+          [
+            264,
+            354,
+            276,
+            55
+          ],
+          [
+            948,
+            332,
+            264,
+            81
+          ],
+          [
+            1615,
+            305,
+            301,
+            143
+          ]
+        ]
+      }
+    }
+  }
+}

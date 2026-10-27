@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "style": "Bocchi the Rock-inspired clean cel animation",
+  "generator": "Built-in ImageGen",
+  "created_at": "2026-10-26",
+  "references": [
+    "User-provided Sydney blue-haired hydrangea portrait",
+    "User-provided simplified anime reference; subsequent explicit Bocchi the Rock style direction"
+  ],
+  "image_processing": "Original generated PNGs are preserved. Alpha is only read to measure display coordinates.",
+  "assets": [
+    {
+      "emotion": "calm",
+      "portrait": {
+        "file": "static/portrait/assets/portraits/calm.png",
+        "prompt": "Create a mouthless transparent standing anime sprite of SYDNEY in the visual style of the anime BOCCHI THE ROCK! (孤独摇滚！).\nUse the supplied blue-haired character reference ONLY to preserve Sydney's identity, blue hair, blue angular geometric hair clip, blue blazer with black tie. Reinterpret the drawing completely in Bocchi the Rock's charming understated slice-of-life anime character style.\nSTYLE: clean playful 2D anime model-sheet art, thin lively slightly hand-drawn dark linework, flat pastel blue colors, minimal hard cel shadow shapes, simple medium-sized expressive blue anime eyes, tiny subtle nose, cute slightly awkward everyday-anime facial proportions. Flat graphic hair clumps with a few plain highlight shapes, no elaborate glossy strands. The character feels like she belongs in a casual Bocchi the Rock anime scene. No painterly realism, no gloss, no skin texture, no grain, no gradients, no bloom.\nCHARACTER: adult anime woman, slim natural non-curvy figure, small understated bust, relaxed straight loose-fitting dark periwinkle blue DOUBLE-BREASTED LONG-SLEEVED BLAZER over a light blue collared shirt and black tie, dark navy pleated skirt and plain opaque dark tights. Her jacket hangs straight and modestly. Long light-blue hair in simple broad locks down to mid-back, her blue geometric clip on viewer's right. No headset. Arms relaxed, hands resting together in front.\nEXPRESSION: calm slightly shy everyday expression, open relaxed blue eyes, gently neutral eyebrows. Head faces straight ahead with only the reference's very slight natural tilt.\nFRAMING: portrait 1024x1536 canvas, centered single standing character from full head to below knees. Entire head visible with transparent margin. Face center around x=512 y=310. This is an animation sprite, same registration will be used for 10 emotions.\nABSOLUTELY NO MOUTH: omit the mouth entirely. Lower face is smooth blank flat skin, no mouth line, no lips, no opening. Mouth animation is a separate layer.\nOutput true transparent alpha background, no scenery, no circle, no moon, no text or labels. One clean anime sprite."
+      },
+      "mouth_atlas": {
+        "file": "static/portrait/assets/mouths/calm.png",
+        "frames": [
+          "closed",
+          "half_open",
+          "open"
+        ],
+        "prompt": "Create a clean ANIME MOUTH ANIMATION SPRITE STRIP on true transparent alpha. The attached image is the authoritative reference for simple TV-anime facial linework.\nExactly three TINY SIMPLE ANIME MOUTH shapes in a wide 3:1 canvas, equally spaced in three invisible equal cells. LEFT closed, MIDDLE half-open, RIGHT open. The mouth shape centers are at one-sixth, one-half and five-sixths of the image width, all on the same horizontal centerline.\nLEFT CLOSED: ONLY ONE thin simple curved charcoal-brown stroke, a slight friendly smile. This is a single line like an anime character's mouth. Absolutely no lip shape or lip volume, no colored lips, no lipstick, no shine, no highlight. Nothing under the line.\nMIDDLE HALF OPEN: simple small rounded shallow bean-shaped opening, a thin dark brown outline, one FLAT muted dark reddish-brown fill inside. No detailed teeth, no gloss, no lips around it.\nRIGHT OPEN: simple small rounded anime open mouth, dark-brown thin outline and FLAT dark reddish fill; a single simple flat muted pink semicircle at the bottom may indicate tongue. No lip rim, no gloss, no realistic gums.\nFlat cel drawing with no gradients and no shading; extremely understated, cute clean anime style. Three mouths only. NO face, skin, cheeks, nose, eyes, text, labels, watermark, borders, boxes, guide lines or background. Do NOT draw glossy lips. The closed mouth is literally one thin line. Plenty of transparent gutter between frames."
+      }
+    },
+    {
+      "emotion": "happy",
+      "portrait": {
+        "file": "static/portrait/assets/portraits/happy.png",
+        "prompt": "Edit ONLY this mouthless Sydney sprite's facial expression to happy, preserving its BOCCHI THE ROCK! / 孤独摇滚！ clean everyday-anime art style. HAPPY: lively smiling eyes with distinctly curved lower eyelids, relaxed upbeat eyebrows and a simple flat cheek blush. Clearly happier than neutral, eyes still open.\nSTRICT REGISTERED SPRITE EDIT: same 1024x1536 canvas, same head tilt and position, same nose and chin locations, same body pose and proportions, small understated bust, loose straight blue suit jacket, black tie, skirt, hands, flat blue hair locks and geometric blue hair clip. Absolutely no change to clothing, body or silhouette. Only eyes, brows and simple cheek accents change.\nMaintain thin lively clean lineart, flat colors and simple hard cel shadows. No glossy rendering, textures, grain, gradients, detailed lip shapes or thick paint. Expressions should read clearly at small size.\nCRITICAL: COMPLETELY MOUTHLESS. Blank smooth lower face, no mouth line, lips, mouth opening, grin or teeth. Lower face stays empty for a separate animated mouth. No text, captions or symbols around character. True transparent alpha background. One aligned standing sprite only.",
+        "revisions": [
+          {
+            "date": "2026-10-26",
+            "reason": "Remove leftover dark background from the gap between the stocking legs.",
+            "prompt": "Use case: background-extraction.\nImage 1 is the EDIT TARGET (happy expression); Image 2 is ONLY a reference for the already-correct transparent gap between the legs.\nCorrect a missed cutout in Image 1: remove the narrow dark-filled BACKGROUND strip between the two black-stocking legs, from immediately below the skirt hem all the way to the bottom image edge. Make that space truly transparent, matching the gap in Image 2. This is not part of the tights. The gap is around x=514–540 at y=1200–1400 and widens toward x=514–570 near the bottom of this 1024x1536 canvas. Follow the EXISTING inner outlines of each leg, retaining those outlines and all actual stocking fabric.\nSTRICTLY preserve the target's exact 1024x1536 canvas, registration, head and face, HAPPY eyes and blush, mouthless lower face, hair, clothing, hands, skirt, both legs, stocking colors, body proportions, and original drawing style. Keep all existing outer transparency. Do NOT redraw, move, widen or reshape the legs, do NOT change the facial expression, and do NOT add a mouth. The only edit is setting that leftover dark strip between the legs to transparent alpha. No opaque backdrop, no checkerboard artwork, no shadows or new elements. Return the entire original standing sprite with this one cutout corrected.",
+            "generated_file": "/Users/mac/.codex/generated_images/01a173a0-418b-73d1-b36c-ac783bb0452a/exec-825c0ad6-e08a-44aa-8624-54c711232314.png"
+          }
+        ]
+      },
+      "mouth_atlas": {
+        "file": "static/portrait/assets/mouths/happy.png",
+        "frames": [
+          "closed",
+          "half_open",
+          "open"
+        ],
+        "prompt": "Edit the supplied transparent clean anime mouth atlas for happy. Happy: left a simple gently upturned curved line; middle small shallow smiling opening; right a simple wide rounded happy opening.\nPreserve this minimal Japanese TV-anime style, wide 3:1 canvas, 3 equally spaced cells and source scale. Exactly THREE frames in a row: left CLOSED, middle HALF-OPEN, right OPEN. Closed is ONLY ONE thin charcoal-brown line, no colored lip shapes at all. Open mouths have a thin dark outline, flat muted reddish-brown interior and at most one flat pink tongue shape.\nNo lip rims, lipstick, volume, gloss, highlights, gradient, shadows, teeth detail, realism or sexy lips. Absolutely no face, skin patch, nose, cheeks, character, other elements, text, labels, cells or background. Pure transparent alpha around three simple flat anime mouth shapes. No extra frames."
+      }
+    },
+    {
+      "emotion": "curious",
+      "portrait": {
+        "file": "static/portrait/assets/portraits/curious.png",
+        "prompt": "Edit ONLY this mouthless Sydney sprite's facial expression to curious, preserving its BOCCHI THE ROCK! / 孤独摇滚！ clean everyday-anime art style. CURIOUS: one eyebrow lifted high, one eye slightly wider, a playful inquisitive gaze. Keep the head in the exact same place.\nSTRICT REGISTERED SPRITE EDIT: same 1024x1536 canvas, same head tilt and position, same nose and chin locations, same body pose and proportions, small understated bust, loose straight blue suit jacket, black tie, skirt, hands, flat blue hair locks and geometric blue hair clip. Absolutely no change to clothing, body or silhouette. Only eyes, brows and simple cheek accents change.\nMaintain thin lively clean lineart, flat colors and simple hard cel shadows. No glossy rendering, textures, grain, gradients, detailed lip shapes or thick paint. Expressions should read clearly at small size.\nCRITICAL: COMPLETELY MOUTHLESS. Blank smooth lower face, no mouth line, lips, mouth opening, grin or teeth. Lower face stays empty for a separate animated mouth. No text, captions or symbols around character. True transparent alpha background. One aligned standing sprite only.",
+        "revisions": [
+          {
+            "date": "2026-10-26",
+            "reason": "Remove leftover dark background from the gap between the stocking legs.",
+            "prompt": "Use case: background-extraction.\nImage 1 is the EDIT TARGET (curious expression); Image 2 is ONLY a reference for the already-correct transparent gap between the legs.\nCorrect a missed cutout in Image 1: remove the narrow dark-filled BACKGROUND strip between the two black-stocking legs, from immediately below the skirt hem all the way to the bottom image edge. Make that space truly transparent, matching the gap in Image 2. This is not part of the tights. The gap is around x=514–540 at y=1200–1400 and widens toward x=514–570 near the bottom of this 1024x1536 canvas. Follow the EXISTING inner outlines of each leg, retaining those outlines and all actual stocking fabric.\nSTRICTLY preserve the target's exact 1024x1536 canvas, registration, head and face, CURIOUS eyes, raised eyebrow, and blush, mouthless lower face, hair, clothing, hands, skirt, both legs, stocking colors, body proportions, and original drawing style. Keep all existing outer transparency. Do NOT redraw, move, widen or reshape the legs, do NOT change the facial expression, and do NOT add a mouth. The only edit is setting that leftover dark strip between the legs to transparent alpha. No opaque backdrop, no checkerboard artwork, no shadows or new elements. Return the entire original standing sprite with this one cutout corrected.",
+            "generated_file": "/Users/mac/.codex/generated_images/01a173a0-418b-73d1-b36c-ac783bb0452a/exec-6f6df295-9bc4-411c-9586-7a26f820d69c.png"
+          }
+        ]
+      },
+      "mouth_atlas": {
+        "file": "static/portrait/assets/mouths/curious.png",
+        "frames": [
+          "closed",
+          "half_open",
+          "open"
+        ],
+        "prompt": "Edit the supplied transparent clean anime mouth atlas for curious. Curious: left a short near-straight line; middle a small rounded o opening; right a slightly larger rounded o opening.\nPreserve this minimal Japanese TV-anime style, wide 3:1 canvas, 3 equally spaced cells and source scale. Exactly THREE frames in a row: left CLOSED, middle HALF-OPEN, right OPEN. Closed is ONLY ONE thin charcoal-brown line, no colored lip shapes at all. Open mouths have a thin dark outline, flat muted reddish-brown interior and at most one flat pink tongue shape.\nNo lip rims, lipstick, volume, gloss, highlights, gradient, shadows, teeth detail, realism or sexy lips. Absolutely no face, skin patch, nose, cheeks, character, other elements, text, labels, cells or background. Pure transparent alpha around three simple flat anime mouth shapes. No extra frames."
+      }
+    },
+    {
+      "emotion": "shy",
+      "portrait": {
+        "file": "static/portrait/assets/portraits/shy.png",
+        "prompt": "Edit ONLY this mouthless Sydney sprite's facial expression to shy, preserving its BOCCHI THE ROCK! / 孤独摇滚！ clean everyday-anime art style. SHY: eyes glancing to the side and slightly downward, simple noticeable flat pink cheek blush, timid raised inner eyebrows. Awkward bashful everyday-anime expression.\nSTRICT REGISTERED SPRITE EDIT: same 1024x1536 canvas, same head tilt and position, same nose and chin locations, same body pose and proportions, small understated bust, loose straight blue suit jacket, black tie, skirt, hands, flat blue hair locks and geometric blue hair clip. Absolutely no change to clothing, body or silhouette. Only eyes, brows and simple cheek accents change.\nMaintain thin lively clean lineart, flat colors and simple hard cel shadows. No glossy rendering, textures, grain, gradients, detailed lip shapes or thick paint. Expressions should read clearly at small size.\nCRITICAL: COMPLETELY MOUTHLESS. Blank smooth lower face, no mouth line, lips, mouth opening, grin or teeth. Lower face stays empty for a separate animated mouth. No text, captions or symbols around character. True transparent alpha background. One aligned standing sprite only.",
+        "revisions": [
+          {
+            "date": "2026-10-26",
+            "reason": "Remove leftover dark background from the gap between the stocking legs.",
+            "prompt": "Use case: background-extraction.\nImage 1 is the EDIT TARGET (shy expression); Image 2 is ONLY a reference for the already-correct transparent gap between the legs.\nCorrect a missed cutout in Image 1: remove the narrow dark-filled BACKGROUND strip between the two black-stocking legs, from immediately below the skirt hem all the way to the bottom image edge. Make that space truly transparent, matching the gap in Image 2. This is not part of the tights. The gap is around x=514–540 at y=1200–1400 and widens toward x=514–570 near the bottom of this 1024x1536 canvas. Follow the EXISTING inner outlines of each leg, retaining those outlines and all actual stocking fabric.\nSTRICTLY preserve the target's exact 1024x1536 canvas, registration, head and face, SHY sideways-looking eyes, timid eyebrows and cheek blush, mouthless lower face, hair, clothing, hands, skirt, both legs, stocking colors, body proportions, and original drawing style. Keep all existing outer transparency. Do NOT redraw, move, widen or reshape the legs, do NOT change the facial expression, and do NOT add a mouth. The only edit is setting that leftover dark strip between the legs to transparent alpha. No opaque backdrop, no checkerboard artwork, no shadows or new elements. Return the entire original standing sprite with this one cutout corrected.",
+            "generated_file": "/Users/mac/.codex/generated_images/01a173a0-418b-73d1-b36c-ac783bb0452a/exec-c37071b1-e5c7-41ae-b152-3d5ed6411697.png"
+          }
+        ]
+      },
+      "mouth_atlas": {
+        "file": "static/portrait/assets/mouths/shy.png",
+        "frames": [
+          "closed",
+          "half_open",
+          "open"
+        ],
+        "prompt": "Edit the supplied transparent clean anime mouth atlas for shy. Shy: left a tiny hesitant gently curved line; middle a small bean-shaped opening; right a soft small rounded opening.\nPreserve this minimal Japanese TV-anime style, wide 3:1 canvas, 3 equally spaced cells and source scale. Exactly THREE frames in a row: left CLOSED, middle HALF-OPEN, right OPEN. Closed is ONLY ONE thin charcoal-brown line, no colored lip shapes at all. Open mouths have a thin dark outline, flat muted reddish-brown interior and at most one flat pink tongue shape.\nNo lip rims, lipstick, volume, gloss, highlights, gradient, shadows, teeth detail, realism or sexy lips. Absolutely no face, skin patch, nose, cheeks, character, other elements, text, labels, cells or background. Pure transparent alpha around three simple flat anime mouth shapes. No extra frames."
+      }
+    },
+    {
+      "emotion": "excited",
+      "portrait": {
+        "file": "static/portrait/assets/portraits/excited.png",
+        "prompt": "Edit ONLY this mouthless Sydney sprite's facial expression to excited, preserving its BOCCHI THE ROCK! / 孤独摇滚！ clean everyday-anime art style. EXCITED: very wide bright enthusiastic blue eyes with simple star-like highlights, raised eyebrows, a little flat blush. Expressive Bocchi the Rock-style upbeat reaction.\nSTRICT REGISTERED SPRITE EDIT: same 1024x1536 canvas, same head tilt and position, same nose and chin locations, same body pose and proportions, small understated bust, loose straight blue suit jacket, black tie, skirt, hands, flat blue hair locks and geometric blue hair clip. Absolutely no change to clothing, body or silhouette. Only eyes, brows and simple cheek accents change.\nMaintain thin lively clean lineart, flat colors and simple hard cel shadows. No glossy rendering, textures, grain, gradients, detailed lip shapes or thick paint. Expressions should read clearly at small size.\nCRITICAL: COMPLETELY MOUTHLESS. Blank smooth lower face, no mouth line, lips, mouth opening, grin or teeth. Lower face stays empty for a separate animated mouth. No text, captions or symbols around character. True transparent alpha background. One aligned standing sprite only."
+      },
+      "mouth_atlas": {
+        "file": "static/portrait/assets/mouths/excited.png",
+        "frames": [
+          "closed",
+          "half_open",
+          "open"
+        ],
+        "prompt": "Edit the supplied transparent clean anime mouth atlas for excited. Excited: left a cheerful upward curved thin smile line; middle an enthusiastic shallow smile opening; right a joyful rounded wide opening with a small flat tongue.\nPreserve this minimal Japanese TV-anime style, wide 3:1 canvas, 3 equally spaced cells and source scale. Exactly THREE frames in a row: left CLOSED, middle HALF-OPEN, right OPEN. Closed is ONLY ONE thin charcoal-brown line, no colored lip shapes at all. Open mouths have a thin dark outline, flat muted reddish-brown interior and at most one flat pink tongue shape.\nNo lip rims, lipstick, volume, gloss, highlights, gradient, shadows, teeth detail, realism or sexy lips. Absolutely no face, skin patch, nose, cheeks, character, other elements, text, labels, cells or background. Pure transparent alpha around three simple flat anime mouth shapes. No extra frames."
+      }
+    },
+    {
+      "emotion": "surprised",
+      "portrait": {
+        "file": "static/portrait/assets/portraits/surprised.png",
+        "prompt": "Edit ONLY this mouthless Sydney sprite's facial expression to surprised, preserving its BOCCHI THE ROCK! / 孤独摇滚！ clean everyday-anime art style. SURPRISED: round wide-open eyes with small blue pupils, high arched brows, a clear slightly comical shocked expression in Bocchi the Rock's expressive anime style.\nSTRICT REGISTERED SPRITE EDIT: same 1024x1536 canvas, same head tilt and position, same nose and chin locations, same body pose and proportions, small understated bust, loose straight blue suit jacket, black tie, skirt, hands, flat blue hair locks and geometric blue hair clip. Absolutely no change to clothing, body or silhouette. Only eyes, brows and simple cheek accents change.\nMaintain thin lively clean lineart, flat colors and simple hard cel shadows. No glossy rendering, textures, grain, gradients, detailed lip shapes or thick paint. Expressions should read clearly at small size.\nCRITICAL: COMPLETELY MOUTHLESS. Blank smooth lower face, no mouth line, lips, mouth opening, grin or teeth. Lower face stays empty for a separate animated mouth. No text, captions or symbols around character. True transparent alpha background. One aligned standing sprite only."
+      },
+      "mouth_atlas": {
+        "file": "static/portrait/assets/mouths/surprised.png",
+        "frames": [
+          "closed",
+          "half_open",
+          "open"
+        ],
+        "prompt": "Edit the supplied transparent clean anime mouth atlas for surprised. Surprised: left a short flat line; middle a SMALL ROUND O; right a LARGER VERTICAL O. Last two are simple oval outlines with flat dark fill, no smile corners.\nPreserve this minimal Japanese TV-anime style, wide 3:1 canvas, 3 equally spaced cells and source scale. Exactly THREE frames in a row: left CLOSED, middle HALF-OPEN, right OPEN. Closed is ONLY ONE thin charcoal-brown line, no colored lip shapes at all. Open mouths have a thin dark outline, flat muted reddish-brown interior and at most one flat pink tongue shape.\nNo lip rims, lipstick, volume, gloss, highlights, gradient, shadows, teeth detail, realism or sexy lips. Absolutely no face, skin patch, nose, cheeks, character, other elements, text, labels, cells or background. Pure transparent alpha around three simple flat anime mouth shapes. No extra frames."
+      }
+    },
+    {
+      "emotion": "laugh",
+      "portrait": {
+        "file": "static/portrait/assets/portraits/laugh.png",
+        "prompt": "Edit ONLY this mouthless Sydney sprite's facial expression to laugh, preserving its BOCCHI THE ROCK! / 孤独摇滚！ clean everyday-anime art style. LAUGHING: both eyes fully closed as joyful upward crescents, happy lifted cheeks and flat pink blush, loose raised eyebrows. Clearly laughing.\nSTRICT REGISTERED SPRITE EDIT: same 1024x1536 canvas, same head tilt and position, same nose and chin locations, same body pose and proportions, small understated bust, loose straight blue suit jacket, black tie, skirt, hands, flat blue hair locks and geometric blue hair clip. Absolutely no change to clothing, body or silhouette. Only eyes, brows and simple cheek accents change.\nMaintain thin lively clean lineart, flat colors and simple hard cel shadows. No glossy rendering, textures, grain, gradients, detailed lip shapes or thick paint. Expressions should read clearly at small size.\nCRITICAL: COMPLETELY MOUTHLESS. Blank smooth lower face, no mouth line, lips, mouth opening, grin or teeth. Lower face stays empty for a separate animated mouth. No text, captions or symbols around character. True transparent alpha background. One aligned standing sprite only.",
+        "revisions": [
+          {
+            "date": "2026-10-26",
+            "reason": "Remove leftover dark background from the gap between the stocking legs.",
+            "prompt": "Use case: background-extraction.\nImage 1 is the EDIT TARGET (laugh expression); Image 2 is ONLY a reference for the already-correct transparent gap between the legs.\nCorrect a missed cutout in Image 1: remove the narrow dark-filled BACKGROUND strip between the two black-stocking legs, from immediately below the skirt hem all the way to the bottom image edge. Make that space truly transparent, matching the gap in Image 2. This is not part of the tights. The gap is around x=514–540 at y=1200–1400 and widens toward x=514–570 near the bottom of this 1024x1536 canvas. Follow the EXISTING inner outlines of each leg, retaining those outlines and all actual stocking fabric.\nSTRICTLY preserve the target's exact 1024x1536 canvas, registration, head and face, LAUGHING closed crescent eyes, eyebrows and blush, mouthless lower face, hair, clothing, hands, skirt, both legs, stocking colors, body proportions, and original drawing style. Keep all existing outer transparency. Do NOT redraw, move, widen or reshape the legs, do NOT change the facial expression, and do NOT add a mouth. The only edit is setting that leftover dark strip between the legs to transparent alpha. No opaque backdrop, no checkerboard artwork, no shadows or new elements. Return the entire original standing sprite with this one cutout corrected.",
+            "generated_file": "/Users/mac/.codex/generated_images/01a173a0-418b-73d1-b36c-ac783bb0452a/exec-b25f4346-32b7-4a94-b469-ac7819cc841e.png"
+          }
+        ]
+      },
+      "mouth_atlas": {
+        "file": "static/portrait/assets/mouths/laugh.png",
+        "frames": [
+          "closed",
+          "half_open",
+          "open"
+        ],
+        "prompt": "Edit the supplied transparent clean anime mouth atlas for laugh. Laugh: left a strongly upward curved single thin smile line; middle a wide happy opening with a flat upper white tooth shape; right a simple broad laughing D-shaped opening with one flat tongue.\nPreserve this minimal Japanese TV-anime style, wide 3:1 canvas, 3 equally spaced cells and source scale. Exactly THREE frames in a row: left CLOSED, middle HALF-OPEN, right OPEN. Closed is ONLY ONE thin charcoal-brown line, no colored lip shapes at all. Open mouths have a thin dark outline, flat muted reddish-brown interior and at most one flat pink tongue shape.\nNo lip rims, lipstick, volume, gloss, highlights, gradient, shadows, teeth detail, realism or sexy lips. Absolutely no face, skin patch, nose, cheeks, character, other elements, text, labels, cells or background. Pure transparent alpha around three simple flat anime mouth shapes. No extra frames."
+      }
+    },
+    {
+      "emotion": "worried",
+      "portrait": {
+        "file": "static/portrait/assets/portraits/worried.png",
+        "prompt": "Edit ONLY this mouthless Sydney sprite's facial expression to worried, preserving its BOCCHI THE ROCK! / 孤独摇滚！ clean everyday-anime art style. WORRIED: strongly raised inner eyebrow ends, anxious lowered eyelids, uneasy blue-eyed gaze, a tiny anime sweat drop near one temple.\nSTRICT REGISTERED SPRITE EDIT: same 1024x1536 canvas, same head tilt and position, same nose and chin locations, same body pose and proportions, small understated bust, loose straight blue suit jacket, black tie, skirt, hands, flat blue hair locks and geometric blue hair clip. Absolutely no change to clothing, body or silhouette. Only eyes, brows and simple cheek accents change.\nMaintain thin lively clean lineart, flat colors and simple hard cel shadows. No glossy rendering, textures, grain, gradients, detailed lip shapes or thick paint. Expressions should read clearly at small size.\nCRITICAL: COMPLETELY MOUTHLESS. Blank smooth lower face, no mouth line, lips, mouth opening, grin or teeth. Lower face stays empty for a separate animated mouth. No text, captions or symbols around character. True transparent alpha background. One aligned standing sprite only.",
+        "revisions": [
+          {
+            "date": "2026-10-26",
+            "reason": "Remove leftover dark background from the gap between the stocking legs.",
+            "prompt": "Use case: background-extraction.\nImage 1 is the EDIT TARGET (worried expression); Image 2 is ONLY a reference for the already-correct transparent gap between the legs.\nCorrect a missed cutout in Image 1: remove the narrow dark-filled BACKGROUND strip between the two black-stocking legs, from immediately below the skirt hem all the way to the bottom image edge. Make that space truly transparent, matching the gap in Image 2. This is not part of the tights. The gap is around x=514–540 at y=1200–1400 and widens toward x=514–570 near the bottom of this 1024x1536 canvas. Follow the EXISTING inner outlines of each leg, retaining those outlines and all actual stocking fabric.\nSTRICTLY preserve the target's exact 1024x1536 canvas, registration, head and face, WORRIED eyes, raised inner eyebrows, and the small cheek sweat drop, mouthless lower face, hair, clothing, hands, skirt, both legs, stocking colors, body proportions, and original drawing style. Keep all existing outer transparency. Do NOT redraw, move, widen or reshape the legs, do NOT change the facial expression, and do NOT add a mouth. The only edit is setting that leftover dark strip between the legs to transparent alpha. No opaque backdrop, no checkerboard artwork, no shadows or new elements. Return the entire original standing sprite with this one cutout corrected.",
+            "generated_file": "/Users/mac/.codex/generated_images/01a173a0-418b-73d1-b36c-ac783bb0452a/exec-4efddc49-a9d9-4254-bbca-f2ece5188375.png"
+          }
+        ]
+      },
+      "mouth_atlas": {
+        "file": "static/portrait/assets/mouths/worried.png",
+        "frames": [
+          "closed",
+          "half_open",
+          "open"
+        ],
+        "prompt": "Edit the supplied transparent clean anime mouth atlas for worried. Worried: left a small downturned thin frown line; middle a small tentative downturned opening; right a restrained oval speaking opening.\nPreserve this minimal Japanese TV-anime style, wide 3:1 canvas, 3 equally spaced cells and source scale. Exactly THREE frames in a row: left CLOSED, middle HALF-OPEN, right OPEN. Closed is ONLY ONE thin charcoal-brown line, no colored lip shapes at all. Open mouths have a thin dark outline, flat muted reddish-brown interior and at most one flat pink tongue shape.\nNo lip rims, lipstick, volume, gloss, highlights, gradient, shadows, teeth detail, realism or sexy lips. Absolutely no face, skin patch, nose, cheeks, character, other elements, text, labels, cells or background. Pure transparent alpha around three simple flat anime mouth shapes. No extra frames.",
+        "revisions": [
+          {
+            "date": "2026-10-26",
+            "reason": "The 30-frame visual review found the same smiling open-mouth error in worried; correct the full-open frown.",
+            "prompt": "Edit this transparent three-frame minimal anime mouth sprite atlas to fix its worried speaking expression. The RIGHTMOST fully-open mouth currently resembles a HAPPY mouth and must instead be a WORRIED / ANXIOUS pleading mouth. Replace only that rightmost frame with a softly rounded inverted-arched frown opening: upper boundary rises at the center and both corners droop DOWN; lower boundary is much flatter and also downturned. An anxious upside-down bean shape, NOT a bowl-shaped grin. No teeth, no cheerful corners. Thin dark brown outline, flat muted reddish brown interior with at most a tiny muted pink tongue area low inside. Leave the first CLOSED downturned line and second HALF-OPEN oval frames unchanged. Keep exactly three separated mouths left-to-right in equal cells on the original wide 3:1 atlas, same scale and positions, ample transparent space. Simple understated Bocchi the Rock inspired TV-anime linework, no lips, no lipstick, no shine, no realistic rendering, no face, no skin, no text. True transparent background.",
+            "generated_file": "exec-5feace0d-9753-4cdf-b7e8-9186f134f334.png"
+          }
+        ]
+      }
+    },
+    {
+      "emotion": "sad",
+      "portrait": {
+        "file": "static/portrait/assets/portraits/sad.png",
+        "prompt": "Edit ONLY this mouthless Sydney sprite's facial expression to sad, preserving its BOCCHI THE ROCK! / 孤独摇滚！ clean everyday-anime art style. SAD: drooping half-closed eyes, visibly sorrowful raised inner brows, a simple tiny tear at lower eyelid. Understated but unmistakable sadness.\nSTRICT REGISTERED SPRITE EDIT: same 1024x1536 canvas, same head tilt and position, same nose and chin locations, same body pose and proportions, small understated bust, loose straight blue suit jacket, black tie, skirt, hands, flat blue hair locks and geometric blue hair clip. Absolutely no change to clothing, body or silhouette. Only eyes, brows and simple cheek accents change.\nMaintain thin lively clean lineart, flat colors and simple hard cel shadows. No glossy rendering, textures, grain, gradients, detailed lip shapes or thick paint. Expressions should read clearly at small size.\nCRITICAL: COMPLETELY MOUTHLESS. Blank smooth lower face, no mouth line, lips, mouth opening, grin or teeth. Lower face stays empty for a separate animated mouth. No text, captions or symbols around character. True transparent alpha background. One aligned standing sprite only."
+      },
+      "mouth_atlas": {
+        "file": "static/portrait/assets/mouths/sad.png",
+        "frames": [
+          "closed",
+          "half_open",
+          "open"
+        ],
+        "prompt": "Edit the supplied transparent clean anime mouth atlas for sad. Sad: left a visibly downward curved simple inverted-U line; middle a small sad opening; right a modest downturned speaking opening.\nPreserve this minimal Japanese TV-anime style, wide 3:1 canvas, 3 equally spaced cells and source scale. Exactly THREE frames in a row: left CLOSED, middle HALF-OPEN, right OPEN. Closed is ONLY ONE thin charcoal-brown line, no colored lip shapes at all. Open mouths have a thin dark outline, flat muted reddish-brown interior and at most one flat pink tongue shape.\nNo lip rims, lipstick, volume, gloss, highlights, gradient, shadows, teeth detail, realism or sexy lips. Absolutely no face, skin patch, nose, cheeks, character, other elements, text, labels, cells or background. Pure transparent alpha around three simple flat anime mouth shapes. No extra frames."
+      }
+    },
+    {
+      "emotion": "angry",
+      "portrait": {
+        "file": "static/portrait/assets/portraits/angry.png",
+        "prompt": "Edit ONLY this mouthless Sydney sprite's facial expression to angry, preserving its BOCCHI THE ROCK! / 孤独摇滚！ clean everyday-anime art style. ANGRY: noticeably angular knitted eyebrows pointing down in the middle, comically narrowed glaring eyes, mildly flushed cheeks. A clean expressive everyday-anime annoyed face.\nSTRICT REGISTERED SPRITE EDIT: same 1024x1536 canvas, same head tilt and position, same nose and chin locations, same body pose and proportions, small understated bust, loose straight blue suit jacket, black tie, skirt, hands, flat blue hair locks and geometric blue hair clip. Absolutely no change to clothing, body or silhouette. Only eyes, brows and simple cheek accents change.\nMaintain thin lively clean lineart, flat colors and simple hard cel shadows. No glossy rendering, textures, grain, gradients, detailed lip shapes or thick paint. Expressions should read clearly at small size.\nCRITICAL: COMPLETELY MOUTHLESS. Blank smooth lower face, no mouth line, lips, mouth opening, grin or teeth. Lower face stays empty for a separate animated mouth. No text, captions or symbols around character. True transparent alpha background. One aligned standing sprite only."
+      },
+      "mouth_atlas": {
+        "file": "static/portrait/assets/mouths/angry.png",
+        "frames": [
+          "closed",
+          "half_open",
+          "open"
+        ],
+        "prompt": "Edit the supplied transparent clean anime mouth atlas for angry. Angry: left an inverted-U downturned thin frown line; middle a small angular tense opening; right a simple angry speaking opening with a very thin flat upper teeth shape.\nPreserve this minimal Japanese TV-anime style, wide 3:1 canvas, 3 equally spaced cells and source scale. Exactly THREE frames in a row: left CLOSED, middle HALF-OPEN, right OPEN. Closed is ONLY ONE thin charcoal-brown line, no colored lip shapes at all. Open mouths have a thin dark outline, flat muted reddish-brown interior and at most one flat pink tongue shape.\nNo lip rims, lipstick, volume, gloss, highlights, gradient, shadows, teeth detail, realism or sexy lips. Absolutely no face, skin patch, nose, cheeks, character, other elements, text, labels, cells or background. Pure transparent alpha around three simple flat anime mouth shapes. No extra frames.",
+        "revisions": [
+          {
+            "date": "2026-10-26",
+            "reason": "Correct angry open mouth: replace smiling corners with a tense, downturned angry shape.",
+            "prompt": "Edit this transparent three-frame anime mouth sprite atlas. Correct only the RIGHTMOST third frame: it wrongly looks like a cheerful laughing mouth. Replace that frame with an unmistakably ANGRY shouting/speaking mouth, same thin dark-brown anime outline and flat simple cel colors as the other two frames. The angry open mouth has mouth corners pulled DOWN at both sides, an inverted-arched upper edge (center HIGHER than the corners, like a frown), tense angular corners, a narrower lower edge and dark flat interior. NO smiling or upward-lifted corners, NO broad U-shaped happy bowl, NO lipstick, NO full lips, NO shine, NO realistic lip rendering. A small thin strip of clenched upper teeth is acceptable, tiny tongue only. The first CLOSED frown and the second HALF-OPEN tense frown frames should stay unchanged. Three completely separate floating mouth shapes arranged left-to-right in three equal cells, centered in each cell and with ample transparent padding between them, original wide horizontal atlas proportions. Transparent background everywhere outside the mouths. No face, no skin-colored patch, no text, no guide lines. Preserve the very simple Bocchi the Rock inspired anime style and thin lines.",
+            "generated_file": "exec-d38e3a13-b55b-4296-825f-1f248602e9d7.png"
+          }
+        ]
+      }
+    }
+  ]
+}

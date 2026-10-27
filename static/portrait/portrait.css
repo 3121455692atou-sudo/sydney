@@ -1,0 +1,61 @@
+/* All additions are confined to the portrait. The original app.css is unchanged. */
+#stage {
+  position: relative;
+  width: clamp(250px, 30vw, 440px);
+  flex: 0 0 auto;
+  height: 100%;
+  overflow: clip;
+  pointer-events: none;
+}
+#stage .portrait-float {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: -12%;
+  height: 112%;
+  aspect-ratio: 2 / 3;
+  transform: translateX(-50%);
+  transform-origin: center 70%;
+  animation: portrait-breathe 6s ease-in-out infinite;
+}
+#stage .portrait-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(7px) scale(.995);
+  transition: opacity .48s ease, transform .6s ease;
+}
+#stage .portrait-layer.active { opacity: 1; transform: none; z-index: 1; }
+#stage .body-sprite { display: block; width: 100%; height: 100%; object-fit: contain; }
+#stage .mouth-crop { position: absolute; overflow: hidden; transform: translate(-50%, -50%); z-index: 3; }
+#stage .mouth-atlas { display: block; position: absolute; max-width: none; max-height: none; }
+#sea { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+#sea span {
+  position: absolute;
+  bottom: calc(-80px - .35em);
+  line-height: 1.4;
+  padding: .15em 0;
+  will-change: transform, opacity;
+}
+/* The original button's display:flex must still honor its hidden state. */
+#send[hidden] { display: none; }
+@keyframes portrait-breathe {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-3px); }
+}
+@media (max-width: 800px) {
+  #stage { width: 190px; }
+}
+@media (max-width: 600px) {
+  #stage { position: fixed; width: 110px; height: 190px; right: 0; top: 0; z-index: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #stage .portrait-float { animation: none; }
+  #stage .portrait-layer { transition: opacity .15s; transform: none; }
+  #sea { display: none; }
+}
+
+
+/* 2023 New Bing emoji: Windows 10 Segoe UI Emoji (black outline). Personal use only; excluded from packages. */
+@font-face { font-family: 'Bing Emoji 2023'; src: url('/assets/fonts/seguiemj-win10.ttf') format('truetype'); font-display: swap; }
+.bing-emoji, #sea span { font-family: 'Bing Emoji 2023', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif; font-style: normal; font-weight: normal; }

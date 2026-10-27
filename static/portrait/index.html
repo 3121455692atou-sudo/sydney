@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sydney</title>
+  <link rel="stylesheet" href="/static/app.css" />
+  <link rel="stylesheet" href="/portrait.css?v=emoji-head-2" />
+  <link rel="stylesheet" href="/mobile.css?v=4" />
+</head>
+<body>
+  <header id="mobile-header" hidden>
+    <button id="mobile-menu" type="button" aria-label="打开聊天菜单" aria-controls="sidebar" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+    </button>
+    <button id="mobile-portrait-toggle" class="mobile-name" type="button" aria-label="放大 Sydney 立绘" aria-controls="stage" aria-expanded="false" title="放大立绘">Sydney</button>
+    <button id="mobile-new-chat" type="button" aria-label="新聊天">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 3l5 5M10 14l2-6 6-6 5 5-6 6z" /></svg>
+    </button>
+  </header>
+  <button id="mobile-backdrop" type="button" tabindex="-1" aria-label="关闭聊天菜单" hidden></button>
+  <aside id="sidebar">
+    <button id="mobile-nav-close" type="button" aria-label="关闭聊天菜单" hidden>×</button>
+    <div class="brand">
+      <img src="/static/bing.svg" alt="" class="logo" />
+      <span>Sydney</span>
+    </div>
+    <button id="new-chat" type="button">
+      <span class="pen">✎</span> 新聊天
+    </button>
+    <div class="sec">最近</div>
+    <ul id="hist"></ul>
+    <div id="think-flag" class="flag" hidden>思考：开</div>
+    <button id="gear" type="button" title="设置">⚙ 设置</button>
+  </aside>
+
+  <div id="app">
+    <main id="thread">
+      <div id="hello">
+        <p class="hi">你好</p>
+        <p class="sub">我是 Sydney。有问题尽管问我。</p>
+      </div>
+    </main>
+    <div id="lock-banner" hidden>这场对话已经结束。请新开对话。</div>
+    <form id="composer">
+      <textarea id="input" rows="1" placeholder="有问题尽管问我…" autocomplete="off"></textarea>
+      <button id="stop" type="button" hidden>停止</button>
+      <button id="send" type="submit" aria-label="发送">➤</button>
+    </form>
+  </div>
+
+
+  <aside id="stage" aria-label="Sydney 情绪立绘">
+    <div id="sea" aria-hidden="true"></div>
+    <div class="portrait-float">
+      <div class="portrait-layer active" id="portrait-a">
+        <img class="body-sprite" src="/assets/portraits/calm.png?v=3" alt="Sydney，平静的表情" draggable="false" />
+        <div class="mouth-crop" aria-hidden="true"><img class="mouth-atlas" alt="" draggable="false" /></div>
+      </div>
+      <div class="portrait-layer" id="portrait-b" aria-hidden="true">
+        <img class="body-sprite" alt="" draggable="false" />
+        <div class="mouth-crop" aria-hidden="true"><img class="mouth-atlas" alt="" draggable="false" /></div>
+      </div>
+    </div>
+  </aside>
+
+  <div id="modal" hidden>
+    <div class="sheet">
+      <h3>设置</h3>
+      <label>当前模型</label>
+      <div id="cur-model" class="mono"></div>
+      <label>Adapter</label>
+      <select id="adapter-sel"></select>
+      <label>显存方案</label>
+      <select id="preset-sel">
+        <option value="8g">8GB 显卡（省显存，回复短一些）</option>
+        <option value="16g">16GB 显卡（更长回复）</option>
+      </select>
+      <label class="chk"><input type="checkbox" id="think-on" /> 思考模式</label>
+      <label class="chk"><input type="checkbox" id="think-expand" /> 默认展开思考内容</label>
+      <label>系统提示词</label>
+      <textarea id="sys-prompt" rows="8"></textarea>
+      <div id="vram" class="hint"></div>
+      <div class="row-btns">
+        <button type="button" id="save-set">保存设置</button>
+        <button type="button" id="apply">卸载并切换</button>
+      </div>
+      <div class="row-btns">
+        <button type="button" id="unload" class="ghost">卸载模型</button>
+        <button type="button" id="close-modal" class="ghost">关闭</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/app.mjs?v=train-format-1"></script>
+  <script type="module" src="/mobile.mjs?v=2"></script>
+</body>
+</html>

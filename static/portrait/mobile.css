@@ -1,0 +1,188 @@
+/* Phone portrait overrides. The existing landscape styles stay in their original files. */
+#mobile-header, #mobile-backdrop, #mobile-nav-close { display: none; }
+#mobile-header[hidden], #mobile-backdrop[hidden], #mobile-nav-close[hidden] { display: none !important; }
+
+html[data-mobile-portrait] {
+  --mobile-header-height: 140px;
+  --mobile-portrait-height: 100px;
+  overflow: hidden;
+}
+html[data-mobile-portrait][data-mobile-compact] {
+  --mobile-header-height: 88px;
+  --mobile-portrait-height: 50px;
+}
+html[data-mobile-portrait] body {
+  position: fixed;
+  top: var(--mobile-top, 0px);
+  left: 0;
+  width: 100%;
+  height: var(--mobile-height, 100dvh);
+  display: grid;
+  grid-template-rows: calc(var(--mobile-header-height) + env(safe-area-inset-top, 0px)) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+  overflow: hidden;
+}
+html[data-mobile-portrait] #mobile-header {
+  display: flex;
+  position: relative;
+  grid-row: 1;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 72px 8px;
+  z-index: 2;
+}
+html[data-mobile-portrait] .mobile-name {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 4px 15px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--side);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 22px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+html[data-mobile-portrait] #mobile-menu,
+html[data-mobile-portrait] #mobile-new-chat,
+html[data-mobile-portrait] #mobile-nav-close {
+  display: flex;
+  position: absolute;
+  top: calc(12px + env(safe-area-inset-top, 0px));
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--side);
+  color: var(--text);
+  padding: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+html[data-mobile-portrait] #mobile-menu { left: 14px; }
+html[data-mobile-portrait] #mobile-new-chat { right: 14px; }
+html[data-mobile-portrait] #mobile-nav-close { top: 12px; right: 10px; font-size: 27px; }
+html[data-mobile-portrait] #stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+html[data-mobile-portrait] #stage .portrait-float {
+  top: calc(4px + env(safe-area-inset-top, 0px));
+  bottom: auto;
+  left: calc(50% - var(--mobile-portrait-height) / 3);
+  width: calc(var(--mobile-portrait-height) * 2 / 3);
+  height: var(--mobile-portrait-height);
+  transform: none;
+  animation: none;
+}
+@keyframes mobile-portrait-breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html[data-mobile-portrait] #stage .portrait-float { animation: mobile-portrait-breathe 6s ease-in-out infinite; }
+}
+html[data-mobile-portrait][data-mobile-portrait-expanded] {
+  --mobile-expanded-chat-height: clamp(180px, calc(var(--mobile-height, 100dvh) * .4), 360px);
+  --mobile-portrait-height: max(100px, calc(var(--mobile-layout-height, 100svh) - clamp(124px, calc(var(--mobile-layout-height, 100svh) * .22), 184px) - 60px - env(safe-area-inset-top, 0px)));
+}
+html[data-mobile-portrait][data-mobile-portrait-expanded] body {
+  grid-template-rows: minmax(56px, 1fr) minmax(0, min(var(--mobile-expanded-chat-height), calc(var(--mobile-height, 100dvh) - 56px)));
+}
+html[data-mobile-portrait][data-mobile-portrait-expanded] #mobile-header {
+  align-items: flex-start;
+  padding-top: calc(8px + env(safe-area-inset-top, 0px));
+}
+html[data-mobile-portrait][data-mobile-portrait-expanded] #stage .portrait-float {
+  top: calc(48px + env(safe-area-inset-top, 0px));
+}
+html[data-mobile-portrait][data-mobile-portrait-expanded] #app {
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  border-radius: 20px 20px 0 0;
+  background: var(--side);
+}
+html[data-mobile-portrait] #app {
+  grid-row: 2;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 12px max(10px, env(safe-area-inset-bottom, 0px));
+}
+html[data-mobile-portrait] #thread {
+  min-width: 0;
+  min-height: 0;
+  max-width: none;
+  padding: 8px 2px 14px;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+html[data-mobile-portrait] #hello { margin-top: clamp(16px, calc(var(--mobile-height, 100dvh) * .09), 80px); }
+html[data-mobile-portrait] #hello .hi { font-size: 32px; }
+html[data-mobile-portrait] #hello .sub { max-width: 270px; margin: 8px auto 0; font-size: 15px; line-height: 1.6; }
+html[data-mobile-portrait] .user-pill { max-width: 88%; border-radius: 20px 20px 5px 20px; }
+html[data-mobile-portrait] .bot-card { max-width: 94%; min-width: 0; border-radius: 20px; }
+html[data-mobile-portrait] .think-card { max-width: 94%; }
+html[data-mobile-portrait] .bot-body { padding: 12px 15px; }
+html[data-mobile-portrait] .bot-foot { font-size: 12px; }
+html[data-mobile-portrait] #composer {
+  width: 100%;
+  max-width: none;
+  flex-shrink: 0;
+  min-height: 54px;
+  margin: 0;
+  padding: 8px 8px 8px 16px;
+  gap: 8px;
+  border: 1px solid var(--line);
+}
+html[data-mobile-portrait] #input { min-width: 0; font-size: 16px; max-height: 120px; }
+html[data-mobile-portrait] #send { width: 40px; height: 40px; }
+html[data-mobile-portrait] #stop { min-height: 40px; }
+html[data-mobile-portrait] #lock-banner { width: 100%; font-size: 14px; flex-shrink: 0; }
+html[data-mobile-portrait] #sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: min(300px, 86vw);
+  height: 100%;
+  min-height: 0;
+  padding-top: max(12px, env(safe-area-inset-top, 0px));
+  padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  transform: translateX(-100%);
+  visibility: hidden;
+  box-shadow: 8px 0 30px rgba(0, 0, 0, .18);
+}
+html[data-mobile-portrait][data-mobile-menu-open] #sidebar { transform: none; visibility: visible; }
+html[data-mobile-portrait] #sidebar .brand { padding-right: 48px; min-height: 52px; }
+html[data-mobile-portrait] #hist { min-height: 0; }
+html[data-mobile-portrait] #hist li { min-height: 44px; }
+html[data-mobile-portrait] #new-chat, html[data-mobile-portrait] #gear { min-height: 44px; }
+html[data-mobile-portrait] #mobile-backdrop {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 25;
+  border: 0;
+  background: rgba(0, 0, 0, .36);
+}
+html[data-mobile-portrait] #modal { position: absolute; z-index: 40; padding: 12px; }
+html[data-mobile-portrait] .sheet { width: min(420px, 100%); max-height: 100%; padding: 18px; overflow-y: auto; overscroll-behavior: contain; }
+html[data-mobile-portrait] .sheet select, html[data-mobile-portrait] #sys-prompt { font-size: 16px; }
+html[data-mobile-portrait] .row-btns button { min-height: 44px; }
+html[data-mobile-portrait] button:focus-visible { outline: 2px solid var(--purple-2); outline-offset: 3px; }

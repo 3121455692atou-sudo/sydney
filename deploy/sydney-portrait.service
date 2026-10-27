@@ -1,0 +1,20 @@
+[Unit]
+Description=Sydney portrait WebUI
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/sydney
+Environment=SYDNEY_PORT=8765
+Environment=SYDNEY_API_BASE=http://127.0.0.1:8099/v1
+Environment=SYDNEY_MODEL=sydney-bonsai
+Environment=SYDNEY_API_KEY_FILE=%h/.config/sydney/api-key.txt
+# 局域网访问：取消下面两行注释，并把网段改成你自己的
+# Environment=SYDNEY_HOST=0.0.0.0
+# Environment=SYDNEY_ALLOWED_NETWORKS=127.0.0.0/8,192.168.1.0/24
+ExecStart=/usr/bin/python3 %h/sydney/portrait_server.py
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

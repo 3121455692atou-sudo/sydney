@@ -1,0 +1,62 @@
+{
+  "calm": {
+    "x": 508,
+    "y": 320,
+    "width": 38,
+    "rotation": -14
+  },
+  "happy": {
+    "x": 508,
+    "y": 320,
+    "width": 38,
+    "rotation": -14
+  },
+  "curious": {
+    "x": 508,
+    "y": 320,
+    "width": 38,
+    "rotation": -14
+  },
+  "shy": {
+    "x": 508,
+    "y": 320,
+    "width": 38,
+    "rotation": -14
+  },
+  "excited": {
+    "x": 508,
+    "y": 320,
+    "width": 38,
+    "rotation": -14
+  },
+  "surprised": {
+    "x": 508,
+    "y": 320,
+    "width": 38,
+    "rotation": -14
+  },
+  "laugh": {
+    "x": 508,
+    "y": 320,
+    "width": 38,
+    "rotation": -14
+  },
+  "worried": {
+    "x": 508,
+    "y": 320,
+    "width": 38,
+    "rotation": -14
+  },
+  "sad": {
+    "x": 508,
+    "y": 320,
+    "width": 38,
+    "rotation": -14
+  },
+  "angry": {
+    "x": 508,
+    "y": 320,
+    "width": 38,
+    "rotation": -14
+  }
+}

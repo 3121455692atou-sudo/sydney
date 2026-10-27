@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+history/
+portrait-settings.json
+portrait-settings.tmp
+static/portrait/downloads/
+# Microsoft Segoe UI Emoji (Windows 10): not redistributable, bring your own copy
+static/portrait/assets/fonts/
