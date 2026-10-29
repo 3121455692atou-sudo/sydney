@@ -43,7 +43,7 @@ function stableLayoutHeight() {
 }
 
 function phonePortrait() {
-  if (window.innerWidth > 600) return false;
+  // Any portrait screen gets the phone layout, tablets included; landscape keeps the desktop layout.
   // A phone's physical orientation remains portrait while its keyboard reduces the viewport.
   if (coarsePointer.matches) {
     if (screen.orientation?.type) return screen.orientation.type.startsWith('portrait');

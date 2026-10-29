@@ -62,7 +62,7 @@ class ServerTests(unittest.TestCase):
         # 没保存过提示词时，默认提示词（sydney_system_prompt.txt）放在最前面
         self.assertEqual(MockModel.last["messages"], [{"role": "system", "content": app.DEFAULT_PROMPT}, {"role": "user", "content": "你好"}])
         self.assertTrue(app.DEFAULT_PROMPT.startswith("# 这是 Sydney 的聊天。"))
-        self.assertFalse(app.GENERATION.locked())
+        self.assertEqual(app.CHAT_QUEUE.active, 0)
     def test_history_keeps_reasoning_and_drops_system_hint(self):
         history = [{"role": "user", "content": "嗨"}, {"role": "assistant", "content": "<l2d>happy</l2d>你好", "reasoning_content": "用户在打招呼"},
                    {"role": "user", "content": "你好", "reasoning_content": "用户消息不带思考"}]
@@ -88,8 +88,56 @@ class ServerTests(unittest.TestCase):
         self.assertTrue(data["ready"])
         self.assertNotIn("api_key", data)
         self.assertNotIn("endpoint", data)
-    def test_competing_generation_is_rejected(self):
-        with app.GENERATION:
+    def test_busy_generation_queues_then_answers(self):
+        self.assertTrue(app.CHAT_QUEUE.hold_all())
+        try:
+            response = self.request("/api/chat", {"messages": [{"role": "user", "content": "你好"}]})
+            self.assertEqual(json.loads(response.readline().decode()[6:]), {"queue": 1})
+        finally:
+            app.CHAT_QUEUE.release_all()
+        with response:
+            events = [json.loads(line[6:]) for line in response.read().decode().splitlines() if line.startswith("data: ")]
+        self.assertEqual(events[0], {"queue": 0})
+        self.assertEqual(events[1], {"reasoning": "思考"})
+        self.assertEqual(events[-1], {"done": True})
+        self.assertEqual(app.CHAT_QUEUE.active, 0)
+        self.assertEqual(len(app.CHAT_QUEUE), 0)
+    def test_free_slot_answers_without_queueing(self):
+        with patch.object(app, "SLOTS", 2):
+            other = app.CHAT_QUEUE.join()
+            self.assertTrue(app.CHAT_QUEUE.take(other, 0))
+            try:
+                with self.request("/api/status") as response:
+                    self.assertEqual({k: v for k, v in json.load(response).items() if k in ("busy", "active", "slots")}, {"busy": False, "active": 1, "slots": 2})
+                with self.request("/api/chat", {"messages": [{"role": "user", "content": "你好"}]}) as response:
+                    events = [json.loads(line[6:]) for line in response.read().decode().splitlines() if line.startswith("data: ")]
+                self.assertEqual(events[0], {"reasoning": "思考"})
+                self.assertEqual(events[-1], {"done": True})
+                self.assertFalse(app.CHAT_QUEUE.hold_all())  # 还有人在生成时不能改设置
+            finally:
+                app.CHAT_QUEUE.release()
+        self.assertEqual(app.CHAT_QUEUE.active, 0)
+    def test_image_message_reaches_model(self):
+        image = {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64,/9j/4AAQSkZJRg=="}}
+        with self.request("/api/chat", {"messages": [{"role": "user", "content": [image, {"type": "text", "text": "这是什么？"}]}]}) as response:
+            response.read()
+        self.assertEqual(MockModel.last["messages"][-1]["content"], [image, {"type": "text", "text": "这是什么？"}])
+        with self.request("/api/chat", {"messages": [{"role": "user", "content": [image]}]}, remote=True) as response:
+            response.read()
+        self.assertEqual(MockModel.last["messages"][-1]["content"], [image])
+    def test_only_inline_images_are_accepted(self):
+        for url in ["http://127.0.0.1:8099/secret.png", "file:///etc/passwd", "data:image/svg+xml;base64,PHN2Zz4=", "data:image/jpeg;base64,abc\""]:
+            with self.assertRaises(urllib.error.HTTPError) as error:
+                self.request("/api/chat", {"messages": [{"role": "user", "content": [{"type": "image_url", "image_url": {"url": url}}]}]})
+            self.assertEqual(error.exception.code, 400)
+            error.exception.close()
+        too_many = [{"type": "image_url", "image_url": {"url": "data:image/png;base64,iVBORw=="}}] * 7
+        with self.assertRaises(urllib.error.HTTPError) as error:
+            self.request("/api/chat", {"messages": [{"role": "user", "content": too_many}]})
+        self.assertEqual(error.exception.code, 400)
+        error.exception.close()
+    def test_full_queue_is_rejected(self):
+        with patch.object(app, "QUEUE_MAX", 0):
             with self.assertRaises(urllib.error.HTTPError) as error: self.request("/api/chat", {"messages": [{"role": "user", "content": "你好"}]})
         self.assertEqual(error.exception.code, 409)
         error.exception.close()
@@ -123,15 +171,16 @@ class ServerTests(unittest.TestCase):
             error.exception.close()
             self.assertEqual(run.call_count, 1)
 
-    def test_remote_thinking_change_preserves_other_settings_and_chat(self):
+    def test_remote_thinking_is_per_request_and_leaves_shared_settings(self):
         app.save_settings({"thinking": True, "prompt": "保留本机提示词", "preset": "8g"})
-        with self.request("/api/settings", {"action": "save", "thinking": False}, remote=True) as response:
-            self.assertTrue(json.load(response)["ok"])
-        self.assertEqual(app.read_settings(), {"thinking": False, "prompt": "保留本机提示词", "preset": "8g"})
-        with self.request("/api/chat", {"messages": [{"role": "user", "content": "你好"}]}, remote=True) as response:
+        with self.request("/api/chat", {"messages": [{"role": "user", "content": "你好"}], "thinking": False}, remote=True) as response:
             self.assertIn('"done": true', response.read().decode())
         self.assertFalse(MockModel.last["chat_template_kwargs"]["enable_thinking"])
         self.assertEqual(MockModel.last["messages"][0]["content"], "保留本机提示词")
+        self.assertEqual(app.read_settings(), {"thinking": True, "prompt": "保留本机提示词", "preset": "8g"})
+        with self.request("/api/chat", {"messages": [{"role": "user", "content": "你好"}]}, remote=True) as response:
+            response.read()
+        self.assertTrue(MockModel.last["chat_template_kwargs"]["enable_thinking"])
 
     def test_remote_cannot_change_other_settings_even_with_local_host_header(self):
         original = app.read_settings()
@@ -140,6 +189,7 @@ class ServerTests(unittest.TestCase):
             {"action": "unload"},
             {"action": "save", "prompt": "禁止写入"},
             {"action": "save", "preset": "8g"},
+            {"action": "save", "thinking": False},
             {"action": "save", "thinking": False, "adapter": app.MODEL},
             {"action": "save", "thinking": False, "prompt": "禁止写入"},
         ]

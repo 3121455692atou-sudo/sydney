@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sydney</title>
   <link rel="stylesheet" href="/static/app.css" />
-  <link rel="stylesheet" href="/portrait.css?v=emoji-head-2" />
-  <link rel="stylesheet" href="/mobile.css?v=4" />
+  <link rel="stylesheet" href="/portrait.css?v=remote-1" />
+  <link rel="stylesheet" href="/mobile.css?v=5" />
 </head>
 <body>
   <header id="mobile-header" hidden>
@@ -42,7 +42,12 @@
       </div>
     </main>
     <div id="lock-banner" hidden>这场对话已经结束。请新开对话。</div>
+    <div id="attachments" hidden></div>
     <form id="composer">
+      <button id="attach" type="button" aria-label="添加图片" title="添加图片（也可以粘贴或拖进来）">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></svg>
+      </button>
+      <input id="file" type="file" accept="image/*" multiple hidden />
       <textarea id="input" rows="1" placeholder="有问题尽管问我…" autocomplete="off"></textarea>
       <button id="stop" type="button" hidden>停止</button>
       <button id="send" type="submit" aria-label="发送">➤</button>
@@ -69,10 +74,10 @@
       <h3>设置</h3>
       <label>当前模型</label>
       <div id="cur-model" class="mono"></div>
-      <label>Adapter</label>
-      <select id="adapter-sel"></select>
-      <label>显存方案</label>
-      <select id="preset-sel">
+      <label data-local>Adapter</label>
+      <select id="adapter-sel" data-local></select>
+      <label data-local>显存方案</label>
+      <select id="preset-sel" data-local>
         <option value="8g">8GB 显卡（省显存，回复短一些）</option>
         <option value="16g">16GB 显卡（更长回复）</option>
       </select>
@@ -81,17 +86,18 @@
       <label>系统提示词</label>
       <textarea id="sys-prompt" rows="8"></textarea>
       <div id="vram" class="hint"></div>
+      <div class="hint remote-note">这里是公网页面：思考开关只对你自己的浏览器生效，模型和提示词只能在运行网页服务的电脑上修改。</div>
       <div class="row-btns">
         <button type="button" id="save-set">保存设置</button>
-        <button type="button" id="apply">卸载并切换</button>
+        <button type="button" id="apply" data-local>卸载并切换</button>
       </div>
       <div class="row-btns">
-        <button type="button" id="unload" class="ghost">卸载模型</button>
+        <button type="button" id="unload" class="ghost" data-local>卸载模型</button>
         <button type="button" id="close-modal" class="ghost">关闭</button>
       </div>
     </div>
   </div>
-  <script type="module" src="/app.mjs?v=train-format-1"></script>
-  <script type="module" src="/mobile.mjs?v=2"></script>
+  <script type="module" src="/app.mjs?v=end-1"></script>
+  <script type="module" src="/mobile.mjs?v=3"></script>
 </body>
 </html>

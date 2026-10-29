@@ -8,11 +8,15 @@
 - 模型在回复里用 `<l2d>标签</l2d>` 自己决定每句话的表情，网页只负责解析和显示
 - 回复里的 emoji 不放进气泡，而是在立绘背后飘成一片 emoji 海
 - 可以展开看她的思考过程
+- 可以发图片给她看（按钮、粘贴、拖进来都行），需要模型服务加载看图模块 `mmproj`
+- 多人同时聊天：模型开几路并发就同时回几条，满了自动排队，页面上显示“前面还有 N 条”；没回出来的消息可以重试，不占轮数
+- 她可以主动结束对话：回复里带 `<end/>` 时这场对话锁住，只能新开一场
+- 竖屏（手机、平板竖着拿）用手机界面，横屏用电脑界面
 - 服务端只用 Python 标准库，没有依赖
 
 ## 需要什么
 
-- NVIDIA 显卡，16GB 显存（16k 上下文实测约 9GB）
+- NVIDIA 显卡，16GB 显存（一路 16k 上下文加看图模块约 9.6GB；每多一路并发再加约 1.15GB）
 - Linux（Windows 也能跑网页，但模型服务要自己编译 Windows 版 llama.cpp）
 - Python 3.10+
 - [PrismML 的 llama.cpp 分支](https://github.com/PrismML-Eng/llama.cpp)：三值权重和 Hadamard 变换只有它支持，官方 llama.cpp 跑不了
@@ -34,8 +38,11 @@ cmake --build build -j --target llama-server
 ```bash
 cd ~/bonsai-2-sydney
 hf download OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-v2-GGUF Ternary-Bonsai-2-27B-Uncensored-Heretic-v2-PQ2_0.gguf --local-dir .
-hf download Atonelia/bonsai-2-Sydney bonsai-2-Sydney-LoRA-F16.gguf --local-dir .
+hf download OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-v2-GGUF mmproj-Q8_0.gguf --local-dir .
+hf download Atonelia/bonsai-2-Sydney bonsai-2-Sydney-LoRA-F16-1029.gguf --local-dir .
 ```
+
+`bonsai-2-Sydney-LoRA-F16-1029.gguf` 是 2026-10-29 的新版，网站上跑的就是它；旧版 `bonsai-2-Sydney-LoRA-F16.gguf` 还在仓库里。`mmproj-Q8_0.gguf` 是底模自带的看图模块，不发图片可以不下，启动时去掉 `--mmproj` 就行。
 
 LoRA 是在 **Heretic v2 的 PQ2_0** 上训练的，换别的底模（包括原版 Bonsai 2 或 PTQ1_0）没测过。
 
@@ -51,12 +58,15 @@ openssl rand -hex 24 > ~/.config/sydney/api-key.txt
 ```bash
 ~/bonsai-2-sydney/llama.cpp/build/bin/llama-server \
   --model ~/bonsai-2-sydney/Ternary-Bonsai-2-27B-Uncensored-Heretic-v2-PQ2_0.gguf \
-  --lora ~/bonsai-2-sydney/bonsai-2-Sydney-LoRA-F16.gguf \
+  --lora ~/bonsai-2-sydney/bonsai-2-Sydney-LoRA-F16-1029.gguf \
+  --mmproj ~/bonsai-2-sydney/mmproj-Q8_0.gguf \
   --alias sydney-bonsai --host 127.0.0.1 --port 8099 \
   --api-key-file ~/.config/sydney/api-key.txt \
   --n-gpu-layers all --ctx-size 16384 --parallel 1 \
   --jinja --reasoning-format deepseek
 ```
+
+想让几个人同时聊，把 `--parallel` 改成 N、`--ctx-size` 改成 16384×N（上下文是平分给每一路的），再给网页设 `SYDNEY_SLOTS=N`。16GB 显卡开 5 路（`--ctx-size 81920 --parallel 5`）实测空闲 14.3GB，单路每秒约 26 个 token，5 路同时跑时每路 12–15 个。
 
 ### 4. 启动网页
 
@@ -92,10 +102,13 @@ systemctl --user start sydney-portrait-model.service sydney-portrait.service
 | `SYDNEY_API_BASE` | `http://127.0.0.1:8099/v1` | 模型接口 |
 | `SYDNEY_MODEL` | `sydney-bonsai` | 模型名，和 `--alias` 一致 |
 | `SYDNEY_API_KEY_FILE` | `~/.config/sydney/api-key.txt` | 模型接口密钥文件，不会发给浏览器 |
+| `SYDNEY_SLOTS` | `1` | 同时生成几条，和模型服务的 `--parallel` 一致 |
+| `SYDNEY_QUEUE_MAX` | `8` | 最多排队几条，再多就提示稍后再试 |
+| `SYDNEY_REMOTE_PORT` | 不开 | 另开一个只监听 127.0.0.1 的端口给反向代理/隧道用（公网入口）。这个入口不能改任何服务器设置，访客的思考开关只存在自己浏览器里 |
 
 网页设置里可以开关思考模式、改系统提示词。默认系统提示词是 `sydney_system_prompt.txt`：2023 年 New Bing 泄露提示词的 Sydney 改写版，告诉她每场对话最多 20 轮、她没有搜索和画图工具、要分清用户和自己说过的话。在网页里保存过的提示词优先于这个文件。聊天记录只存在浏览器本地。
 
-采样参数写在 `portrait_server.py` 里：temperature 1.0、top_p 0.95、top_k 20、min_p 0.05、presence_penalty 0.6，再加 DRY 防复读。DRY 的分隔符里加了 `<` `>` `/`，否则会把 `</l2d>` 罚坏。
+采样参数写在 `portrait_server.py` 里：temperature 1.0、top_p 0.95、top_k 20、min_p 0.05，防复读只用 DRY。DRY 的分隔符里加了 `<` `>` `/`，所以不会碰到表情标签和 `<end/>`。presence_penalty 已经关掉（0）：它不认协议，会连表情标签一起罚，实测把中途换表情的回复从训练数据的 28% 压到了 21%。
 
 多轮对话按训练时的格式发给模型：每条历史回复带上它自己的思考（`reasoning_content`），并传 `reasoning_effort: "medium"`，让聊天模板不插入英文的 reasoning effort 系统提示。
 
@@ -107,7 +120,11 @@ systemctl --user start sydney-portrait-model.service sydney-portrait.service
 <l2d>happy</l2d>你好！我是 Sydney。😊<l2d>curious</l2d>你今天想聊什么？
 ```
 
-十个标签：`calm` `happy` `curious` `shy` `excited` `surprised` `laugh` `worried` `sad` `angry`。每个标签管到下一个标签为止。解析在 `static/portrait/protocol.mjs`，测试在 `tests/`。
+十个标签：`calm` `happy` `curious` `shy` `excited` `surprised` `laugh` `worried` `sad` `angry`。每个标签管到下一个标签为止。
+
+回复末尾的 `<end/>` 表示她主动结束这场对话（被骂得很难受时会这样）。它不显示出来，思考里出现的不算。
+
+解析在 `static/portrait/protocol.mjs`，测试在 `tests/`。
 
 ## emoji 字体
 
@@ -121,9 +138,9 @@ static/portrait/assets/fonts/seguiemj-win10.ttf
 
 ## 已知问题
 
-- 长对话里有时会搞混说话人，把自己说过的话当成用户说的，或者把"你"和"她"说反
-- 问她是谁训练的，有时会说是微软
-- 问她长什么样，经常说不出来
+- 长对话里有时会搞混说话人，把自己说过的话当成用户说的，或者把"你"和"我"说反
+- 问“Atonelia 是谁”时有时答不上来，或者把 Atonelia 说成自己的名字
+- 看图没有专门训练过：发图时她有时会忘了自己是 Sydney，比如把 ChatGPT 的 logo 当成自己
 - 底模是去审查版（Heretic），基本不拒答
 
 ## 测试

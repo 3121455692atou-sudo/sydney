@@ -13,8 +13,8 @@ export const EMOTIONS = Object.freeze({
 
 // 增量消费协议；半截标签留在缓冲区，绝不闪到正文，也不触发口型。
 export class ProtocolDecoder {
-  constructor({ text = () => {}, emotion = () => {}, reasoning = () => {} } = {}) {
-    this.handlers = { text, emotion, reasoning };
+  constructor({ text = () => {}, emotion = () => {}, reasoning = () => {}, end = () => {} } = {}) {
+    this.handlers = { text, emotion, reasoning, end };
     this.buffer = '';
     this.thinking = false;
   }
@@ -29,6 +29,8 @@ export class ProtocolDecoder {
       const lower = this.buffer.toLowerCase();
       if (lower.startsWith('<think>')) { this.thinking = true; this.buffer = this.buffer.slice(7); continue; }
       if (lower.startsWith('</think>')) { this.thinking = false; this.buffer = this.buffer.slice(8); continue; }
+      // <end/>：Sydney 主动结束这场对话。只是协议，不显示，也不算文字。
+      if (lower.startsWith('<end/>')) { if (!this.thinking) this.handlers.end(); this.buffer = this.buffer.slice(6); continue; }
       const opening = /^<l2d\s*>/i.exec(this.buffer);
       if (opening) {
         const closing = /<\/l2[dg]\s*>/i.exec(this.buffer.slice(opening[0].length));
@@ -44,7 +46,7 @@ export class ProtocolDecoder {
         this.buffer = this.buffer.slice(opening[0].length + closing.index + closing[0].length);
         continue;
       }
-      if (['<l2d>', '<l2d ', '<think>', '</think>'].some(tag => tag.startsWith(lower))) {
+      if (['<l2d>', '<l2d ', '<think>', '</think>', '<end/>'].some(tag => tag.startsWith(lower))) {
         if (!final) break;
         this.buffer = '';
         break;
@@ -143,4 +145,12 @@ export class SSEDecoder {
     }
   }
   end() { if (this.buffer.trim()) this.push('\n\n'); }
+}
+
+// 回复里有 <end/>（思考之外）就是 Sydney 主动结束了这场对话。
+export function endsChat(raw) {
+  let ended = false;
+  const parser = new ProtocolDecoder({ end: () => { ended = true; } });
+  parser.push(raw || ''); parser.end();
+  return ended;
 }

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { ProtocolDecoder, SentenceQueue, SSEDecoder, splitEmoji, speakingDuration, speechTimeline, speechProgress, visibleBubbles, visibleText, EMOTIONS } from '../static/portrait/protocol.mjs';
+import { ProtocolDecoder, SentenceQueue, SSEDecoder, splitEmoji, speakingDuration, speechTimeline, speechProgress, visibleBubbles, visibleText, endsChat, EMOTIONS } from '../static/portrait/protocol.mjs';
 
 test('任意网络分块下十种情绪与正文均保持完整', () => {
   const source = Object.keys(EMOTIONS).map(name => `<l2d>${name}</l2d>这是一句中文。`).join('');
@@ -85,4 +85,18 @@ test('不同位置的 emoji 逐个停止补充，组合 emoji 不会拆开显示
   assert.equal(speechProgress(timeline, 155).text, '先👩🏽‍💻然');
   assert.deepEqual(speechProgress(timeline, 465).pendingEmoji, []);
   assert.equal(speechProgress(speechTimeline('💙✨'), 0).text, '💙✨');
+});
+
+test('<end/> 是结束协议：不显示、任意分块都能识别，提到“结束这场对话”不算', () => {
+  const raw = '<l2d>angry</l2d>够了。<end/>';
+  for (let cut = 1; cut < raw.length; cut++) {
+    let text = '', ended = false;
+    const parser = new ProtocolDecoder({ text: t => { text += t; }, end: () => { ended = true; } });
+    parser.push(raw.slice(0, cut)); parser.push(raw.slice(cut)); parser.end();
+    assert.equal(text, '够了。'); assert.equal(ended, true);
+  }
+  assert.equal(visibleText(raw), '够了。');
+  assert.equal(endsChat(raw), true);
+  assert.equal(endsChat('<l2d>calm</l2d>我不想结束这场对话。'), false);
+  assert.equal(endsChat('<think>要不要<end/>呢</think><l2d>calm</l2d>继续聊吧。'), false);
 });

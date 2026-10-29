@@ -56,6 +56,28 @@
 }
 
 
+/* Retry on a reply that failed before any text (e.g. Sydney busy with someone else); it does not use up a turn. */
+.bot-foot .retry { border: 1px solid var(--line); background: transparent; color: inherit; font: inherit; border-radius: 999px; padding: 2px 14px; cursor: pointer; }
+.bot-foot .retry:hover { background: rgba(127, 127, 127, .12); }
+/* Pictures: button left of the input, previews above it, thumbnails in the user's bubble. */
+#attach { width: 36px; height: 36px; margin-left: -8px; border: 0; border-radius: 50%; background: transparent; color: var(--muted, #777); cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+#attach:hover { background: rgba(127, 127, 127, .12); }
+#attach:disabled { opacity: .4; cursor: default; }
+#attachments { display: flex; flex-wrap: wrap; gap: 10px; max-width: 768px; width: calc(100% - 24px); margin: 0 auto 8px; }
+#attachments[hidden] { display: none; }
+#attachments .att { position: relative; }
+#attachments img { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); display: block; }
+#attachments button { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; padding: 0; border: 0; border-radius: 50%; background: rgba(0, 0, 0, .65); color: #fff; font-size: 13px; line-height: 20px; cursor: pointer; }
+.user-images { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.user-images:last-child { margin-bottom: 0; }
+.user-images img { max-width: min(180px, 100%); max-height: 180px; border-radius: 10px; display: block; }
+.img-dropped { font-size: 12px; opacity: .8; }
+html[data-mobile-portrait] #attachments { width: 100%; flex-shrink: 0; }
+.queue-note { align-self: flex-start; margin: 4px 0 8px; font-size: 13px; color: var(--muted, #777); }
+
 /* 2023 New Bing emoji: Windows 10 Segoe UI Emoji (black outline). Personal use only; excluded from packages. */
 @font-face { font-family: 'Bing Emoji 2023'; src: url('/assets/fonts/seguiemj-win10.ttf') format('truetype'); font-display: swap; }
 .bing-emoji, #sea span { font-family: 'Bing Emoji 2023', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif; font-style: normal; font-weight: normal; }
+/* Public page: hide the controls only the machine running the server may use, and say so. */
+#modal.remote [data-local] { display: none !important; }
+#modal:not(.remote) .remote-note { display: none; }

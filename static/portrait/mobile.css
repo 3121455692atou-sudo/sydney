@@ -186,3 +186,10 @@ html[data-mobile-portrait] .sheet { width: min(420px, 100%); max-height: 100%; p
 html[data-mobile-portrait] .sheet select, html[data-mobile-portrait] #sys-prompt { font-size: 16px; }
 html[data-mobile-portrait] .row-btns button { min-height: 44px; }
 html[data-mobile-portrait] button:focus-visible { outline: 2px solid var(--purple-2); outline-offset: 3px; }
+
+/* Tablets and other wide portrait screens: same layout as a phone, with a bigger portrait and one centred column. */
+@media (min-width: 700px) {
+  html[data-mobile-portrait] { --mobile-header-height: 210px; --mobile-portrait-height: 170px; }
+  html[data-mobile-portrait] #app > * { width: 100%; max-width: 780px; margin-left: auto; margin-right: auto; }
+  html[data-mobile-portrait] #mobile-header { padding-bottom: 12px; }
+}
