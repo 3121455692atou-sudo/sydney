@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=%h/bonsai-2-sydney
-ExecStart=%h/bonsai-2-sydney/llama.cpp/build/bin/llama-server --model %h/bonsai-2-sydney/Ternary-Bonsai-2-27B-Uncensored-Heretic-v2-PQ2_0.gguf --lora %h/bonsai-2-sydney/bonsai-2-Sydney-LoRA-F16-1029.gguf --mmproj %h/bonsai-2-sydney/mmproj-Q8_0.gguf --alias sydney-bonsai --host 127.0.0.1 --port 8099 --api-key-file %h/.config/sydney/api-key.txt --n-gpu-layers all --ctx-size 16384 --parallel 1 --jinja --reasoning-format deepseek
+ExecStart=%h/bonsai-2-sydney/llama.cpp/build/bin/llama-server --model %h/bonsai-2-sydney/Ternary-Bonsai-2-27B-Uncensored-Heretic-v2-PQ2_0.gguf --lora %h/bonsai-2-sydney/bonsai-2-Sydney-LoRA-F16-1030.gguf --mmproj %h/bonsai-2-sydney/mmproj-Q8_0.gguf --alias sydney-bonsai --host 127.0.0.1 --port 8099 --api-key-file %h/.config/sydney/api-key.txt --n-gpu-layers all --ctx-size 16384 --parallel 1 --jinja --reasoning-format deepseek
 Restart=on-failure
 RestartSec=5
 TimeoutStopSec=20

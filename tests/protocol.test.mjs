@@ -100,3 +100,17 @@ test('<end/> 是结束协议：不显示、任意分块都能识别，提到“�
   assert.equal(endsChat('<l2d>calm</l2d>我不想结束这场对话。'), false);
   assert.equal(endsChat('<think>要不要<end/>呢</think><l2d>calm</l2d>继续聊吧。'), false);
 });
+
+test('走样的结束标记（[END]、<end>、</end>、<end />）同样识别且不显示，普通方括号照常显示', () => {
+  for (const mark of ['[END]', '[end]', '<end>', '</end>', '<end />', '<END/>']) {
+    const raw = `<l2d>angry</l2d>别找我来。\n\n${mark}`;
+    for (let cut = 1; cut < raw.length; cut++) {
+      let text = '', ended = false;
+      const parser = new ProtocolDecoder({ text: t => { text += t; }, end: () => { ended = true; } });
+      parser.push(raw.slice(0, cut)); parser.push(raw.slice(cut)); parser.end();
+      assert.equal(text, '别找我来。\n\n'); assert.equal(ended, true, `${mark} @${cut}`);
+    }
+  }
+  assert.equal(visibleText('<l2d>calm</l2d>见 [1] 和 [e] 还有 [ending]。'), '见 [1] 和 [e] 还有 [ending]。');
+  assert.equal(endsChat('<l2d>calm</l2d>见 [1] 和 [ending]。'), false);
+});

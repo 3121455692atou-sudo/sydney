@@ -1,4 +1,4 @@
-import { ProtocolDecoder, SentenceQueue, SSEDecoder, visibleText, visibleBubbles, endsChat } from './protocol.mjs?v=end-1';
+import { ProtocolDecoder, SentenceQueue, SSEDecoder, visibleText, visibleBubbles, endsChat } from './protocol.mjs?v=end-2';
 import { createPortrait } from './portrait.mjs?v=stop-2';
 import { decorateEmoji } from './bing-emoji.mjs?v=1';
 

@@ -39,10 +39,10 @@ cmake --build build -j --target llama-server
 cd ~/bonsai-2-sydney
 hf download OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-v2-GGUF Ternary-Bonsai-2-27B-Uncensored-Heretic-v2-PQ2_0.gguf --local-dir .
 hf download OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-v2-GGUF mmproj-Q8_0.gguf --local-dir .
-hf download Atonelia/bonsai-2-Sydney bonsai-2-Sydney-LoRA-F16-1029.gguf --local-dir .
+hf download Atonelia/bonsai-2-Sydney bonsai-2-Sydney-LoRA-F16-1030.gguf --local-dir .
 ```
 
-`bonsai-2-Sydney-LoRA-F16-1029.gguf` 是 2026-10-29 的新版，网站上跑的就是它；旧版 `bonsai-2-Sydney-LoRA-F16.gguf` 还在仓库里。`mmproj-Q8_0.gguf` 是底模自带的看图模块，不发图片可以不下，启动时去掉 `--mmproj` 就行。
+`bonsai-2-Sydney-LoRA-F16-1030.gguf` 是 2026-10-30 的新版，网站上跑的就是它；旧版 `-1029` 和 `bonsai-2-Sydney-LoRA-F16.gguf` 还在仓库里。`mmproj-Q8_0.gguf` 是底模自带的看图模块，不发图片可以不下，启动时去掉 `--mmproj` 就行。
 
 LoRA 是在 **Heretic v2 的 PQ2_0** 上训练的，换别的底模（包括原版 Bonsai 2 或 PTQ1_0）没测过。
 
@@ -58,7 +58,7 @@ openssl rand -hex 24 > ~/.config/sydney/api-key.txt
 ```bash
 ~/bonsai-2-sydney/llama.cpp/build/bin/llama-server \
   --model ~/bonsai-2-sydney/Ternary-Bonsai-2-27B-Uncensored-Heretic-v2-PQ2_0.gguf \
-  --lora ~/bonsai-2-sydney/bonsai-2-Sydney-LoRA-F16-1029.gguf \
+  --lora ~/bonsai-2-sydney/bonsai-2-Sydney-LoRA-F16-1030.gguf \
   --mmproj ~/bonsai-2-sydney/mmproj-Q8_0.gguf \
   --alias sydney-bonsai --host 127.0.0.1 --port 8099 \
   --api-key-file ~/.config/sydney/api-key.txt \
@@ -122,7 +122,7 @@ systemctl --user start sydney-portrait-model.service sydney-portrait.service
 
 十个标签：`calm` `happy` `curious` `shy` `excited` `surprised` `laugh` `worried` `sad` `angry`。每个标签管到下一个标签为止。
 
-回复末尾的 `<end/>` 表示她主动结束这场对话（被骂得很难受时会这样）。它不显示出来，思考里出现的不算。
+回复末尾的 `<end/>` 表示她主动结束这场对话（被骂得很难受时会这样）。它不显示出来，思考里出现的不算。模型偶尔会写走样成 `[END]`、`<end>`、`</end>` 或 `<end />`，网页一样当结束处理。
 
 解析在 `static/portrait/protocol.mjs`，测试在 `tests/`。
 
@@ -138,8 +138,8 @@ static/portrait/assets/fonts/seguiemj-win10.ttf
 
 ## 已知问题
 
-- 长对话里有时会搞混说话人，把自己说过的话当成用户说的，或者把"你"和"我"说反
-- 问“Atonelia 是谁”时有时答不上来，或者把 Atonelia 说成自己的名字
+- 有时会搞混说话人，把自己说过的话当成用户说的，或者把"你"和"我"说反；被骂时偶尔把自己的处境套到用户身上，或者同一句话说两遍
+- 问“Atonelia 是谁”时偶尔把关系说反（比如说成“我训练出来的人”）
 - 看图没有专门训练过：发图时她有时会忘了自己是 Sydney，比如把 ChatGPT 的 logo 当成自己
 - 底模是去审查版（Heretic），基本不拒答
 

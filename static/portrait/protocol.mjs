@@ -23,14 +23,16 @@ export class ProtocolDecoder {
   emit(text) { if (text) this.handlers[this.thinking ? 'reasoning' : 'text'](text); }
   drain(final) {
     while (this.buffer) {
-      const start = this.buffer.indexOf('<');
+      const start = this.buffer.search(/[<[]/);
       if (start < 0) { this.emit(this.buffer); this.buffer = ''; break; }
       if (start > 0) { this.emit(this.buffer.slice(0, start)); this.buffer = this.buffer.slice(start); }
       const lower = this.buffer.toLowerCase();
       if (lower.startsWith('<think>')) { this.thinking = true; this.buffer = this.buffer.slice(7); continue; }
       if (lower.startsWith('</think>')) { this.thinking = false; this.buffer = this.buffer.slice(8); continue; }
       // <end/>：Sydney 主动结束这场对话。只是协议，不显示，也不算文字。
-      if (lower.startsWith('<end/>')) { if (!this.thinking) this.handlers.end(); this.buffer = this.buffer.slice(6); continue; }
+      // 模型偶尔写走样（[END]、<end>、</end>、<end />），一样当结束处理。
+      const ending = /^(?:<\/?end\s*\/?>|\[end\])/i.exec(this.buffer);
+      if (ending) { if (!this.thinking) this.handlers.end(); this.buffer = this.buffer.slice(ending[0].length); continue; }
       const opening = /^<l2d\s*>/i.exec(this.buffer);
       if (opening) {
         const closing = /<\/l2[dg]\s*>/i.exec(this.buffer.slice(opening[0].length));
@@ -46,7 +48,7 @@ export class ProtocolDecoder {
         this.buffer = this.buffer.slice(opening[0].length + closing.index + closing[0].length);
         continue;
       }
-      if (['<l2d>', '<l2d ', '<think>', '</think>', '<end/>'].some(tag => tag.startsWith(lower))) {
+      if (['<l2d>', '<l2d ', '<think>', '</think>', '<end/>', '<end />', '</end>', '[end]'].some(tag => tag.startsWith(lower))) {
         if (!final) break;
         this.buffer = '';
         break;
